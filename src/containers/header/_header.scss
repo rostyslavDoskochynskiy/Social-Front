@@ -1,0 +1,66 @@
+.header {
+  width: 100%;
+  height: 54px;
+  padding: 20px 10px 20px 100px;
+  background-color: #66B650;
+  color: #fff;
+  border-radius: 0 0 3px 3px;
+  box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__logo {
+    flex-grow: 10;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: space-evenly;
+  }
+
+  &__avatar {
+    flex-grow: 1;
+  }
+
+  & .ant-dropdown-link {
+    width: 100px;
+    height: inherit;
+    border-radius: 2px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+  }
+
+  & .ant-dropdown-link:before {
+    left: 0;
+  }
+
+  & .ant-dropdown-menu-item {
+    text-align: center;
+  }
+
+  & .ant-dropdown-menu-item:hover {
+    background-color: #a6f09282;
+  }
+
+  &__img {
+    max-width: 40px;
+    height: 40px;
+    flex-grow: 1;
+  }
+
+  & .anticon-down {
+    font-size: 20px;
+    color: #fff;
+  }
+
+  &__drop > svg {
+    font-size: 18px;
+  }
+}
+

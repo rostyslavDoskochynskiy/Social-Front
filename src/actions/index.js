@@ -1,15 +1,16 @@
 import * as axios from "axios";
 import {
-    AUTH_FAILED,
     AUTH_START,
+    AUTH_FAILED,
     AUTH_SUCCESS,
-    SIGN_IN,
-    LOG_OUT,
     SIGN_UP_START,
-    SIGN_UP_SUCCESS,
     SIGN_UP_FAILED,
+    SIGN_UP_SUCCESS,
+    SIGN_IN_START,
+    SIGN_IN_FAILED,
+    SIGN_IN_SUCCESS,
+    LOG_OUT,
 } from "./types";
-import {message} from "antd";
 
 export const authCheck = () => async dispatch => {
     dispatch ( authStart () );
@@ -76,7 +77,6 @@ const signUpSuccess = ( data = {} ) => {
     };
 };
 
-
 const signUpFailed = (error = null) => {
     return {
         type: SIGN_UP_FAILED,
@@ -85,34 +85,55 @@ const signUpFailed = (error = null) => {
 };
 
 export const signIn = userCredentials => async dispatch => {
-    userCredentials = JSON.stringify(userCredentials);
-    let axiosConfig = {
-        headers: {
-            'Content-Type': 'application/json',
-        }
+    dispatch ( signInStart () );
+    try {
+        userCredentials = JSON.stringify(userCredentials);
+        let axiosConfig = {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+        let response = await axios.post('/auth/local/signin', userCredentials, axiosConfig);
+        const { data } = response;
+        return dispatch( data ? signInSuccess(data) : signInFailed());
+    } catch (e) {
+        return dispatch(signInFailed(e))
+    }
+};
+
+const signInStart = () => {
+    return {
+        type: SIGN_IN_START,
     };
-    let response = await axios.post('auth/local/signin', userCredentials, axiosConfig);
-    const {data} = response;
-    dispatch({
-        type: SIGN_IN,
+};
+
+const signInSuccess = ( data = {} ) => {
+    console.log(data);
+    return {
+        type: SIGN_IN_SUCCESS,
         payload: data,
-        loggedIn: true
-    });
-    return data;
+    };
+};
+
+
+const signInFailed = (error = null) => {
+    return {
+        type: SIGN_IN_FAILED,
+        error,
+    };
 };
 
 export const logOutUser = () => async dispatch => {
     try {
-        let response = await axios.get('auth/logout');
+        let response = await axios.get('/auth/logout');
         dispatch({
             type: LOG_OUT,
             loggedIn: false,
             auth: false,
-            user: null
+            user: null,
         });
         return response.data;
     } catch (e) {
         return e;
     }
-
 };

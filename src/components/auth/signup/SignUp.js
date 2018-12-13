@@ -19,17 +19,23 @@ class SignUpForm extends Component {
             location: '',
             birthday: '',
             phone: ''
-        }
+        },
+        error: ''
     };
 
-    handleSubmit = async e => {
+    handleSubmit = e => {
         e.preventDefault();
-        const { signUp } = this.props;
-        await signUp(this.state.auth);
+        const { signUp, error } = this.props;
+        const { auth } = this.state;
+        signUp(auth);
+        if (!error) {
+            return false
+        }
+        if(error.length > 0)
+            this.setState({error});
     };
 
     componentWillReceiveProps({ isReg, history }) {return isReg ? history.push("signin") : ''}
-
 
     handleChange = e => {
         const { auth } = this.state;
@@ -48,9 +54,10 @@ class SignUpForm extends Component {
                 (e, i) =>
                     <Input type={types[i]} key={i} name={items[i]} onChangeInput={this.handleChange}/>
         );
+        const showErrorMessage = () => <ModalBasic classNameText="signup__title" className="signup__modal" container="signup" errorText={this.props.error} />;
         return (
             <div className="signup" id="signup">
-                {this.props.error ? <ModalBasic classNameText="signup__title" className="signup__modal" container="signup" errorText={this.props.error} /> : ''}
+                {this.state.error ?  showErrorMessage() : ''}
                 <form onSubmit={this.handleSubmit}>
                     <h3 className="signup__title">Please register</h3>
                     {inputFields()}

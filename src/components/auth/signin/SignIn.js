@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {NavLink} from "react-router-dom";
+import {NavLink, withRouter} from "react-router-dom";
 import {signIn} from "../../../actions";
 import Input from '../Input';
 import Button from "../../Button";
@@ -19,8 +19,16 @@ class SignInForm extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        return this.props.signIn(this.state.auth)
+        this.props.signIn(this.state.auth);
     };
+
+    componentWillReceiveProps(props) {
+        // console.log('---------')
+        if(props.isAuthenticated) {
+            this.props.history.push('/profile');
+        }
+    }
+
 
     handleChange = e => {
         if (!e) {
@@ -37,9 +45,12 @@ class SignInForm extends Component {
             (e, i) =>
                 <Input type={types[i]} key={i} name={items[i]} onChangeInput={this.handleChange}/>
         );
+
+        console.log(this.props.isAuthenticated);
+
         return (
             <div className="signin">
-                {this.state.error}
+                {/*{this.state.error}*/}
                 <form onSubmit={this.handleSubmit}>
                     <h3 className="signin__title">If you are registered already</h3>
                     {inputFields()}
@@ -55,10 +66,11 @@ class SignInForm extends Component {
     }
 }
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = (state) => {
+    // console.log(state);
     return {
-        isAuthenticated: auth.loggedIn,
-        authChecking: auth.initialChecking,
+        isAuthenticated: state.auth.loggedIn,
+        authChecking: state.auth.initialChecking,
     };
 };
 

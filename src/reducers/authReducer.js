@@ -1,11 +1,14 @@
 import {
-    AUTH_FAILED,
     AUTH_START,
+    AUTH_FAILED,
     AUTH_SUCCESS,
     SIGN_UP_START,
     SIGN_UP_FAILED,
     SIGN_UP_SUCCESS,
-    SIGN_IN,
+    SIGN_IN_START,
+    SIGN_IN_FAILED,
+    SIGN_IN_SUCCESS, LOG_OUT
+
 } from "../actions/types";
 
 const initialState = {
@@ -60,14 +63,32 @@ const reducer = ( state = initialState, action ) => {
                 loggedIn: false,
                 error
             };
-        case SIGN_IN:
+        case SIGN_IN_START:
+            console.log(action);
             return {
                 ...state,
-                user: payload,
-                loggedIn: true,
+
+            };
+        case SIGN_IN_FAILED:
+            return {
+                ...state,
+                user: null,
+                loggedIn: false,
+                error
+            };
+        case SIGN_IN_SUCCESS:
+            return {
+                ...state,
+                user: payload.user,
                 isReg: true,
-                initialChecking: false,
-                loading: false
+                loggedIn: payload.loggedIn
+            };
+        case LOG_OUT:
+            console.log(action);
+            return {
+                ...state,
+                user: null,
+                loggedIn: payload.loggedIn
             };
         default:
             return state;

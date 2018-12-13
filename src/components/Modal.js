@@ -3,10 +3,16 @@ import { Modal } from 'antd';
 import Text from "./Text";
 
 export class ModalBasic extends Component {
-    state = { visible: false };
+    state = { visible: false, errorText: '' };
 
-    componentWillReceiveProps({errorText}) {
-        return errorText.length > 0 ? this.showModal() : ''
+    componentWillMount(){
+        const { errorText } = this.props;
+        this.setState({ errorText});
+        return this.showModal();
+    }
+
+    componentWillUnmount() {
+        this.setState({errorText: ''})
     }
 
     showModal = () => {
@@ -22,8 +28,8 @@ export class ModalBasic extends Component {
     };
 
     render() {
-        const { title, container, errorText, className, classNameText } = this.props;
-        const { visible } = this.state;
+        const { title, container, className, classNameText } = this.props;
+        const { visible, errorText } = this.state;
         return <Modal
                     title={title}
                     visible={visible}

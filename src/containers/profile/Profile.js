@@ -6,7 +6,20 @@ import { logOutUser } from "../../actions";
 import Header from "../header/Header";
 import Sidebar from "../sidebar/sidebar";
 
+import {subscribeToTimer} from "../../api";
+
 class Profile extends Component {
+
+    state = {
+        timestamp: 'no timestamp yet'
+    };
+
+    constructor(props) {
+        super(props);
+        subscribeToTimer((err, timestamp) => this.setState({
+            timestamp
+        }));
+    }
 
     render() {
         if(!this.props.user){
@@ -18,11 +31,20 @@ class Profile extends Component {
                 <div className="profile">
                     {/*<Sidebar/>*/}
                     {/*<div style={{flexGrow: '1', backgroundColor: $color}}>*/}
-                        {/*Sidebar*/}
+                    {/*Sidebar*/}
                     {/*</div>*/}
                     <div style={{flexGrow: '2'}}>
                         <Header headerInfo={headerInfo} logOutUser={this.props.logOutUser}/>
-                        <main>main</main>
+                        <main>
+                            <div id="messages"></div>
+                            <form action="" name="chat">
+                                <input type="text" name="msg"/>
+                                <input type="submit" id="sendMsg"/>
+                            </form>
+
+                            This is the timer value: {this.state.timestamp}
+
+                        </main>
                     </div>
                 </div>
             );

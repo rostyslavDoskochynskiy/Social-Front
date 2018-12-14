@@ -12,11 +12,11 @@ import DropdownComponent from "../../components/Dropdown";
 class Header extends Component {
 
     componentDidMount() {
-        console.log(this.props);
+        // console.log(this.props);
     }
 
     componentWillReceiveProps(props){
-        console.log(props);
+        // console.log(props);
     }
 
     render() {
@@ -59,7 +59,6 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         user: state.auth.user
     };

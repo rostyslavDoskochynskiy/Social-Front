@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Icon } from 'antd';
+import { bindActionCreators } from "redux";
+import { logOutUser } from "../../actions";
+import { withRouter } from "react-router";
+import connect from "react-redux/es/connect/connect";
 import ava from '../../assets/ava.png';
 import Img from "../../components/Img";
 import Text from "../../components/Text";
 import DropdownComponent from "../../components/Dropdown";
-import {withRouter} from "react-router";
-import connect from "react-redux/es/connect/connect";
-import {bindActionCreators} from "redux";
-import {logOutUser} from "../../actions";
 
 class Header extends Component {
 

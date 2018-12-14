@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
-import {NavLink, withRouter} from "react-router-dom";
-import {signIn} from "../../../actions";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { NavLink } from "react-router-dom";
+import { signIn } from "../../../actions";
 import Input from '../Input';
 import Button from "../../Button";
 import Text from "../../Text";
+import { ModalBasic } from "../../Modal";
 
 class SignInForm extends Component {
 
@@ -19,16 +20,15 @@ class SignInForm extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        this.props.signIn(this.state.auth);
+        const { signIn, error } = this.props;
+        const { auth } = this.state;
+        signIn(auth);
+        if(!error) return false;
+        else if(error.length > 0)
+            this.setState({error});
     };
 
-    componentWillReceiveProps(props) {
-        // console.log('---------')
-        if(props.isAuthenticated) {
-            this.props.history.push('/profile');
-        }
-    }
-
+    componentWillReceiveProps({ isAuthenticated, history }) {return isAuthenticated ? history.push('/profile') : ''}
 
     handleChange = e => {
         if (!e) {
@@ -45,12 +45,10 @@ class SignInForm extends Component {
             (e, i) =>
                 <Input type={types[i]} key={i} name={items[i]} onChangeInput={this.handleChange}/>
         );
-
-        console.log(this.props.isAuthenticated);
-
+        const showErrorMessage = () => <ModalBasic classNameText="signin__title" className="signin__modal" container="signin" errorText={this.state.error} />;
         return (
-            <div className="signin">
-                {/*{this.state.error}*/}
+            <div className="signin" id="signin">
+                {this.state.error ?  showErrorMessage() : ''}
                 <form onSubmit={this.handleSubmit}>
                     <h3 className="signin__title">If you are registered already</h3>
                     {inputFields()}
@@ -66,11 +64,10 @@ class SignInForm extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    // console.log(state);
+const mapStateToProps = ({ auth }) => {
     return {
-        isAuthenticated: state.auth.loggedIn,
-        authChecking: state.auth.initialChecking,
+        isAuthenticated: auth.loggedIn,
+        error: auth.error
     };
 };
 

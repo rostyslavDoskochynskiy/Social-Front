@@ -7,7 +7,8 @@ import {
     SIGN_UP_SUCCESS,
     SIGN_IN_START,
     SIGN_IN_FAILED,
-    SIGN_IN_SUCCESS, LOG_OUT
+    SIGN_IN_SUCCESS,
+    LOG_OUT
 
 } from "../actions/types";
 
@@ -17,11 +18,11 @@ const initialState = {
     initialChecking: true,
     isReg: false,
     error: null,
-    loading: true,
+    loading: true
 };
 
 const reducer = ( state = initialState, action ) => {
-    const {type, user, loggedIn, error, payload} = action;
+    const { type, user, loggedIn, error, payload } = action;
     switch ( type ) {
         case AUTH_START:
             return {
@@ -64,12 +65,12 @@ const reducer = ( state = initialState, action ) => {
                 error
             };
         case SIGN_IN_START:
-            console.log(action);
             return {
                 ...state,
 
             };
         case SIGN_IN_FAILED:
+            console.log(action);
             return {
                 ...state,
                 user: null,
@@ -84,11 +85,10 @@ const reducer = ( state = initialState, action ) => {
                 loggedIn: payload.loggedIn
             };
         case LOG_OUT:
-            console.log(action);
             return {
                 ...state,
                 user: null,
-                loggedIn: payload.loggedIn
+                loggedIn: loggedIn
             };
         default:
             return state;

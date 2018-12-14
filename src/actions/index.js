@@ -97,7 +97,7 @@ export const signIn = userCredentials => async dispatch => {
         const { data } = response;
         return dispatch( data ? signInSuccess(data) : signInFailed());
     } catch (e) {
-        return dispatch(signInFailed(e))
+        return dispatch(signInFailed(e.response.statusText))
     }
 };
 
@@ -108,7 +108,6 @@ const signInStart = () => {
 };
 
 const signInSuccess = ( data = {} ) => {
-    console.log(data);
     return {
         type: SIGN_IN_SUCCESS,
         payload: data,

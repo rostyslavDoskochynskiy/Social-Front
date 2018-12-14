@@ -16,7 +16,6 @@ body, div, input, h1, h2, h3 {
   height: 100vh;
 }
 
-
 // Common
 @import './common/reset';
 @import './common/variables';
@@ -28,6 +27,11 @@ body, div, input, h1, h2, h3 {
 @import "../components/auth/signin/signin";
 @import "../containers/header/header";
 @import "../containers/profile/profile";
+
+
+
+
+
 
 
 

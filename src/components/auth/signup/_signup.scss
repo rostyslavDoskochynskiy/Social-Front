@@ -1,13 +1,13 @@
 .signup {
   position: relative;
   z-index: 1;
-  background: #FFFFFF;
+  background: #fff;
   padding: 45px;
   text-align: center;
   width: 700px;
   height: 500px;
   margin: 30px;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  box-shadow: $boxShadow;
 
   &__info {
     display: flex;
@@ -15,8 +15,9 @@
     align-items: center;
   }
 
+
   &__title {
-    color: #4CAF50;
+    color: $color;
     margin-bottom: 30px;
   }
 
@@ -27,18 +28,18 @@
   & .ant-btn {
     text-transform: uppercase;
     outline: 0;
-    background-color: #4CAF50;
+    background-color: $color;
     width: 100%;
     height: 30px;
     border: 0;
-    color: #FFFFFF;
+    color: white;
     font-size: 14px;
     transition: all 0.3s ease;
     cursor: pointer;
   }
 
   & .ant-btn:hover, & .ant-btn:active, & .ant-btn:focus {
-    background-color: #43A047;
+    background-color: $colorHover !important;
     color: #fff;
   }
 
@@ -50,12 +51,12 @@
   }
 
   &__link_btn {
-    color: #4CAF50;
+    color: $color;
     text-decoration: none;
     margin-left: 4px;
 
     &:hover {
-      color: #4CAF50;
+      color: $color;
     }
   }
 

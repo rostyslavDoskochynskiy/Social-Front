@@ -64,7 +64,6 @@ table {
   background-color: transparent; }
 
 .lds-spinner {
-  color: red;
   display: inline-block;
   position: relative;
   width: 64px;
@@ -88,7 +87,7 @@ table {
     width: 5px;
     height: 14px;
     border-radius: 20%;
-    background: #00f90073; }
+    background: #4CAF50; }
   .lds-spinner__items:nth-child(1) {
     transform: rotate(0deg);
     animation-delay: -1.1s; }
@@ -129,7 +128,7 @@ table {
 .signup {
   position: relative;
   z-index: 1;
-  background: #FFFFFF;
+  background: #fff;
   padding: 45px;
   text-align: center;
   width: 700px;
@@ -152,12 +151,12 @@ table {
     width: 100%;
     height: 30px;
     border: 0;
-    color: #FFFFFF;
+    color: white;
     font-size: 14px;
     transition: all 0.3s ease;
     cursor: pointer; }
   .signup .ant-btn:hover, .signup .ant-btn:active, .signup .ant-btn:focus {
-    background-color: #43A047;
+    background-color: #43A047 !important;
     color: #fff; }
   .signup__question, .signup__link {
     margin: 15px 0 0;
@@ -201,7 +200,7 @@ table {
     width: 100%;
     height: 30px;
     border: 0;
-    color: #FFFFFF;
+    color: #fff;
     font-size: 14px;
     transition: all 0.3s ease;
     cursor: pointer; }
@@ -223,7 +222,7 @@ table {
   width: 100%;
   height: 54px;
   padding: 20px 10px 20px 100px;
-  background-color: #66B650;
+  background-color: #4CAF50;
   color: #fff;
   border-radius: 0 0 3px 3px;
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.15);
@@ -253,7 +252,8 @@ table {
   .header .ant-dropdown-menu-item {
     text-align: center; }
   .header .ant-dropdown-menu-item:hover {
-    background-color: #a6f09282; }
+    background-color: #43A047;
+    color: #fff !important; }
   .header__img {
     max-width: 40px;
     height: 40px;
@@ -266,4 +266,5 @@ table {
 
 .profile {
   height: 100%;
-  width: 100%; }
+  width: 100%;
+  display: flex; }

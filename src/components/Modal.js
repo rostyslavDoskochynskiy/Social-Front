@@ -12,7 +12,8 @@ export class ModalBasic extends Component {
     }
 
     componentWillUnmount() {
-        this.setState({errorText: ''})
+        this.setState({errorText: ''});
+
     }
 
     showModal = () => {
@@ -21,10 +22,12 @@ export class ModalBasic extends Component {
         });
     };
 
-    handleOk = () => {
+    handleCancel = () => {
         this.setState({
             visible: false,
         });
+        let modal = document.getElementsByClassName('modal')[0];
+        console.log(modal);
     };
 
     render() {
@@ -33,8 +36,9 @@ export class ModalBasic extends Component {
         return <Modal
                     title={title}
                     visible={visible}
-                    onOk={this.handleOk}
-                    onCancel={this.handleOk}
+                    onOk={this.handleCancel}
+                    wrapClassName='modal'
+                    onCancel={this.handleCancel}
                     className={className}
                     getContainer={() => document.getElementById(container)}
                 >
